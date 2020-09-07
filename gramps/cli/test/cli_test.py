@@ -94,7 +94,8 @@ class Test(unittest.TestCase):
         g = re.search("INDI", content)
         self.assertTrue(g, "found 'INDI' in output file")
 
-    def test2_exec_CLI_m(self):
+    def test2_exec_cli_m(self):
+        """Test the `python -m gramps` way to run the CLI."""
         ifile = min1r
         ofile = out_ged
         gcmd = [sys.executable, "-m", "gramps", "-i", ifile, "-e", ofile]
