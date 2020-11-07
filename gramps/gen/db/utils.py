@@ -69,7 +69,7 @@ def make_database(plugin_id):
         if mod:
             database = getattr(mod, pdata.databaseclass)
             db = database()
-            if __debug__:
+            if __debug__ and _LOG.isEnabledFor(logging.DEBUG):
                 import inspect
                 caller_frame = inspect.stack()[1]
                 _LOG.debug("Database class instance created Class:%s instance:%s. "
