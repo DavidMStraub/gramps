@@ -158,13 +158,14 @@ def wrapper(method):
         This 'wrapped' method logs the original function that was called, and
         where it was called from.
         """
-        class_name = args[0].__class__.__name__
-        func_name = method.__name__
-        caller_frame = inspect.stack()[1]
-        LOG.debug('calling %s.%s()... from file %s, line %s in %s',
-                  class_name, func_name, os.path.split(caller_frame[1])[1],
-                  caller_frame[2], caller_frame[3])
-        return method(*args, **keywargs)
+        if __debug__:
+            class_name = args[0].__class__.__name__
+            func_name = method.__name__
+            caller_frame = inspect.stack()[1]
+            LOG.debug('calling %s.%s()... from file %s, line %s in %s',
+                    class_name, func_name, os.path.split(caller_frame[1])[1],
+                    caller_frame[2], caller_frame[3])
+            return method(*args, **keywargs)
     return wrapped
 
 
