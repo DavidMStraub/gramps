@@ -56,6 +56,7 @@ jobs:
         sudo apt-get install python-libxml2
         sudo apt-get install zlib1g-dev
         sudo apt-get install python3-setuptools
+        sudo apt-get install python3-mypy
     - name: Install addons
       run: |
         mkdir -p ~/.gramps/gramps52/plugins/
@@ -66,6 +67,9 @@ jobs:
     - name: Build
       run: |
         python3 setup.py build
+    - name: Run mypy static type checker
+      run: |
+        mypy gramps
     - name: Run unit test suite
       run: |
         export GDK_BACKEND=-
