@@ -30,19 +30,20 @@ Plugins are divided into several categories. These are: reports, tools,
 importers, exporters, quick reports, and document generators.
 """
 
+import importlib
+import logging
+
 # -------------------------------------------------------------------------
 #
 # Standard Python modules
 #
 # -------------------------------------------------------------------------
 import os
-import sys
 import re
-import logging
-import importlib
+import sys
 
 LOG = logging.getLogger("._manager")
-LOG.progagate = True
+LOG.propagate = True
 from ..const import GRAMPS_LOCALE as glocale
 
 _ = glocale.translation.gettext
@@ -53,8 +54,8 @@ _ = glocale.translation.gettext
 #
 # -------------------------------------------------------------------------
 from ..config import config
-from . import PluginRegister, ImportPlugin, ExportPlugin, DocGenPlugin
 from ..constfunc import win
+from . import DocGenPlugin, ExportPlugin, ImportPlugin, PluginRegister
 
 # -------------------------------------------------------------------------
 #
@@ -74,6 +75,7 @@ class BasePluginManager:
 
     __instance = None
 
+    @staticmethod
     def get_instance():
         """
         Use this function to get the instance of the :class:`.PluginManager`
@@ -82,8 +84,6 @@ class BasePluginManager:
             BasePluginManager.__instance = 1  # Set to 1 for __init__()
             BasePluginManager.__instance = BasePluginManager()
         return BasePluginManager.__instance
-
-    get_instance = staticmethod(get_instance)
 
     def __init__(self):
         """This function should only be run once by get_instance()"""

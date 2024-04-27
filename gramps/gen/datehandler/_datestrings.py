@@ -291,17 +291,18 @@ class DateStrings:
 
 # set GRAMPS_RESOURCES then: python3 -m gramps.gen.datehandler._datestrings
 if __name__ == "__main__":
-    import sys
-    from ..utils.grampslocale import GrampsLocale
-    from ..const import GRAMPS_LOCALE as glocale
-    from ._grampslocale import (
-        _deprecated_long_months as old_long,
-        _deprecated_short_months as old_short,
-        _deprecated_short_days as old_short_days,  # Icelandic needs them
-        _deprecated_long_days as old_days,
-    )
-    from ._datedisplay import DateDisplay
     import gettext
+    import sys
+
+    from ..const import GRAMPS_LOCALE as glocale
+    from ..utils.grampslocale import GrampsLocale
+    from ._datedisplay import DateDisplay
+    from ._grampslocale import _deprecated_long_days as old_days
+    from ._grampslocale import _deprecated_long_months as old_long
+    from ._grampslocale import (
+        _deprecated_short_days as old_short_days,  # Icelandic needs them
+    )
+    from ._grampslocale import _deprecated_short_months as old_short
 
     lang = glocale.lang
     lang_short = lang[:2]
@@ -335,13 +336,13 @@ if __name__ == "__main__":
     except AttributeError:
         localized_months = old_long
 
-    def print_po_snippet(en_loc_old_lists, context):
+    def print_po_snippet(en_loc_old_lists, context, line: int = 10000):
         for m, localized, old in zip(*en_loc_old_lists):
             if m == "":
                 continue
             if m == localized:
                 localized = old
-            print("#: {file}:{line}".format(file=filename, line=print_po_snippet.line))
+            print("#: {file}:{line}".format(file=filename, line=line))
             if context:
                 print('msgctxt "{context}"'.format(context=context))
             print(
@@ -350,9 +351,7 @@ if __name__ == "__main__":
                     en_month=m, localized_month=localized
                 )
             )
-            print_po_snippet.line += 1
-
-    print_po_snippet.line = 10000
+            line += 1
 
     try:
         localized_months = dd.__class__.long_months

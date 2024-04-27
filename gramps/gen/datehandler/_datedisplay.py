@@ -39,8 +39,11 @@ import datetime
 #
 # -------------------------------------------------------------------------
 import logging
+from typing import Tuple
 
 log = logging.getLogger(".DateDisplay")
+
+from ..const import GRAMPS_LOCALE as glocale
 
 # -------------------------------------------------------------------------
 #
@@ -48,7 +51,6 @@ log = logging.getLogger(".DateDisplay")
 #
 # -------------------------------------------------------------------------
 from ..lib.date import Date
-from ..const import GRAMPS_LOCALE as glocale
 from ..utils.grampslocale import GrampsLocale
 from ._datestrings import DateStrings
 
@@ -68,7 +70,7 @@ class DateDisplay:
     Base date display class.
     """
 
-    formats = (
+    formats: Tuple[str, ...] = (
         # format 0 - must always be ISO
         # Translators: Numeric year, month, day
         _T_("YYYY-MM-DD (ISO)"),

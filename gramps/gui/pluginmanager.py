@@ -34,7 +34,13 @@ importers, exporters, quick reports, and document generators.
 #
 # -------------------------------------------------------------------------
 import os
-from gi.repository import Gtk, GdkPixbuf, Gdk
+
+from gi.repository import Gdk, GdkPixbuf, Gtk
+
+from gramps.gen.config import config
+from gramps.gen.const import ICON
+from gramps.gen.constfunc import win
+from gramps.gen.plug import BasePluginManager, PluginRegister
 
 # -------------------------------------------------------------------------
 #
@@ -42,10 +48,6 @@ from gi.repository import Gtk, GdkPixbuf, Gdk
 #
 # -------------------------------------------------------------------------
 from gramps.gen.utils.callback import Callback
-from gramps.gen.plug import BasePluginManager, PluginRegister
-from gramps.gen.constfunc import win
-from gramps.gen.config import config
-from gramps.gen.const import ICON
 
 
 # -------------------------------------------------------------------------
@@ -63,14 +65,13 @@ class GuiPluginManager(Callback):
     __instance = None
     __signals__ = {"plugins-reloaded": None}
 
+    @staticmethod
     def get_instance():
         """Use this function to get the instance of the PluginManager"""
         if GuiPluginManager.__instance is None:
             GuiPluginManager.__instance = 1  # Set to 1 for __init__()
             GuiPluginManager.__instance = GuiPluginManager()
         return GuiPluginManager.__instance
-
-    get_instance = staticmethod(get_instance)
 
     def __init__(self):
         """This function should only be run once by get_instance()"""

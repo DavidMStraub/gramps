@@ -30,8 +30,8 @@ and a register for the data of all plugins .
 #
 # -------------------------------------------------------------------------
 import os
-import sys
 import re
+import sys
 import traceback
 
 # -------------------------------------------------------------------------
@@ -39,10 +39,11 @@ import traceback
 # Gramps modules
 #
 # -------------------------------------------------------------------------
-from ...version import VERSION as GRAMPSVERSION, VERSION_TUPLE
-from ..utils.requirements import Requirements
-from ..const import IMAGE_DIR
+from ...version import VERSION as GRAMPSVERSION
+from ...version import VERSION_TUPLE
 from ..const import GRAMPS_LOCALE as glocale
+from ..const import IMAGE_DIR
+from ..utils.requirements import Requirements
 
 _ = glocale.translation.gettext
 import logging
@@ -1303,14 +1304,13 @@ class PluginRegister:
 
     __instance = None
 
+    @staticmethod
     def get_instance():
         """Use this function to get the instance of the PluginRegister"""
         if PluginRegister.__instance is None:
             PluginRegister.__instance = 1  # Set to 1 for __init__()
             PluginRegister.__instance = PluginRegister()
         return PluginRegister.__instance
-
-    get_instance = staticmethod(get_instance)
 
     def __init__(self):
         """This function should only be run once by get_instance()"""

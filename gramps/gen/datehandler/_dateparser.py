@@ -26,12 +26,6 @@ Date parsing class. Serves as the base class for any localized
 date parsing class. The default base class provides parsing for English.
 """
 
-# -------------------------------------------------------------------------
-#
-# Python modules
-#
-# -------------------------------------------------------------------------
-import re
 import calendar
 
 # -------------------------------------------------------------------------
@@ -41,7 +35,17 @@ import calendar
 # -------------------------------------------------------------------------
 import logging
 
+# -------------------------------------------------------------------------
+#
+# Python modules
+#
+# -------------------------------------------------------------------------
+import re
+from typing import Dict, Set
+
 log = logging.getLogger(".DateParser")
+
+from ..const import GRAMPS_LOCALE as glocale
 
 # -------------------------------------------------------------------------
 #
@@ -49,7 +53,6 @@ log = logging.getLogger(".DateParser")
 #
 # -------------------------------------------------------------------------
 from ..lib.date import Date, DateError, Today
-from ..const import GRAMPS_LOCALE as glocale
 from ..utils.grampslocale import GrampsLocale
 from ._datestrings import DateStrings
 
@@ -222,7 +225,8 @@ class DateParser:
     }
 
     # seeded with __init_prefix_tables
-    swedish_to_int = month_to_int = {}
+    swedish_to_int: Dict[str, int] = {}
+    month_to_int: Dict[str, int] = {}
     """
     Map Gregorian month names and their prefixes, wherever unambiguous,
     to the relevant integer index (1..12).
@@ -248,7 +252,7 @@ class DateParser:
     }
     # in some languages some of above listed modifiers are after the date,
     # in that case the subclass should put them into this dictionary instead
-    modifier_after_to_int = {}
+    modifier_after_to_int: Dict[str, int] = {}
 
     hebrew_to_int = {
         "tishri": 1,
@@ -338,13 +342,13 @@ class DateParser:
     }
 
     # seeded with __init_prefix_tables
-    persian_to_int = {}
+    persian_to_int: Dict[str, int] = {}
 
     bce = ["B.C.E.", "B.C.E", "BCE", "B.C.", "B.C", "BC"]
     # (overridden if a locale-specific date parser exists)
 
     # seeded with __init_prefix_tables
-    calendar_to_int = {}
+    calendar_to_int: Dict[str, int] = {}
     # (probably overridden if a locale-specific date parser exists)
 
     newyear_to_int = {
@@ -373,7 +377,7 @@ class DateParser:
     # for "today".
     # We also secretly support "$T" like in some reports.
 
-    _langs = set()
+    _langs: Set[str] = set()
 
     def __init_prefix_tables(self):
         ds = self._ds = DateStrings(self._locale)
