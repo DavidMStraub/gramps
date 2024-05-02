@@ -30,15 +30,16 @@
 
 """LaTeX document generator"""
 
+import logging
+import os
+import re
+
 # ------------------------------------------------------------------------
 #
 # Python modules
 #
 # ------------------------------------------------------------------------
 from bisect import bisect
-import re
-import os
-import logging
 
 try:
     from PIL import Image
@@ -47,20 +48,21 @@ try:
 except ImportError:
     HAVE_PIL = False
 
+from gramps.gen.const import GRAMPS_LOCALE as glocale
+from gramps.gen.plug.docbackend import DocBackend
+
 # ----------------------------------------------------------------------- -
 #
 # Gramps modules
 #
 # ------------------------------------------------------------------------
 from gramps.gen.plug.docgen import (
+    FONT_SANS_SERIF,
+    PAPER_LANDSCAPE,
+    URL_PATTERN,
     BaseDoc,
     TextDoc,
-    PAPER_LANDSCAPE,
-    FONT_SANS_SERIF,
-    URL_PATTERN,
 )
-from gramps.gen.plug.docbackend import DocBackend
-from gramps.gen.const import GRAMPS_LOCALE as glocale
 
 _ = glocale.translation.gettext
 
@@ -610,7 +612,8 @@ class LaTeXBackend(DocBackend):
         DocBackend.SUPERSCRIPT: ("\\textsuperscript{", "}"),
     }
 
-    ESCAPE_FUNC = lambda x: latexescape
+    def ESCAPE_FUNC(x):
+        return latexescape
 
     def setescape(self, preformatted=False):
         """
@@ -622,7 +625,7 @@ class LaTeXBackend(DocBackend):
         else:
             LaTeXBackend.ESCAPE_FUNC = lambda x: latexescapeverbatim
 
-    def _create_xmltag(self, type, value):
+    def _create_xmltag(self, tagtype, value):
         r"""
         overwrites the method in DocBackend.
         creates the latex tags needed for non bool style types we support:
@@ -631,9 +634,9 @@ class LaTeXBackend(DocBackend):
                                      : very basic, in mono in the font face
                                         then we use {\ttfamily }
         """
-        if type not in self.SUPPORTED_MARKUP:
+        if tagtype not in self.SUPPORTED_MARKUP:
             return None
-        elif type == DocBackend.FONTSIZE:
+        elif tagtype == DocBackend.FONTSIZE:
             # translate size in point to something LaTeX can work with
             fontsize = map_font_size(value)
             if fontsize:
@@ -641,7 +644,7 @@ class LaTeXBackend(DocBackend):
             else:
                 return ("", "")
 
-        elif type == DocBackend.FONTFACE:
+        elif tagtype == DocBackend.FONTFACE:
             if "MONO" in value.upper():
                 return ("{\\ttfamily ", "}")
             elif "ROMAN" in value.upper():
