@@ -23,22 +23,23 @@
 Handles generation and access to thumbnails used in Gramps.
 """
 
+import logging
+
 # -------------------------------------------------------------------------
 #
 # Standard python modules
 #
 # -------------------------------------------------------------------------
 import os
-import logging
 from hashlib import md5
+from typing import List
 
 # -------------------------------------------------------------------------
 #
 # GTK/Gnome modules
 #
 # -------------------------------------------------------------------------
-from gi.repository import GLib
-from gi.repository import GdkPixbuf
+from gi.repository import GdkPixbuf, GLib
 
 try:
     from gi.repository import Gtk
@@ -55,13 +56,13 @@ except:
 from gramps.gen.const import (
     ICON,
     IMAGE_DIR,
+    SIZE_LARGE,
+    SIZE_NORMAL,
     THUMB_LARGE,
     THUMB_NORMAL,
-    SIZE_NORMAL,
-    SIZE_LARGE,
 )
-from gramps.gen.plug import BasePluginManager, START
 from gramps.gen.mime import get_type
+from gramps.gen.plug import START, BasePluginManager, Thumbnailer
 
 # -------------------------------------------------------------------------
 #
@@ -70,7 +71,7 @@ from gramps.gen.mime import get_type
 # -------------------------------------------------------------------------
 LOG = logging.getLogger(".thumbnail")
 
-THUMBNAILERS = []
+THUMBNAILERS: List[Thumbnailer] = []
 
 
 def get_thumbnailers():

@@ -52,13 +52,15 @@ Specific symbols for parts of a name are defined:
     ======  ===============================================================
 """
 
+import logging
+
 # -------------------------------------------------------------------------
 #
 # Python modules
 #
 # -------------------------------------------------------------------------
 import re
-import logging
+from typing import Callable, Dict
 
 LOG = logging.getLogger(".gramps.gen")
 
@@ -67,7 +69,8 @@ LOG = logging.getLogger(".gramps.gen")
 # Gramps modules
 #
 # -------------------------------------------------------------------------
-from ..const import ARABIC_COMMA, ARABIC_SEMICOLON, GRAMPS_LOCALE as glocale
+from ..const import ARABIC_COMMA, ARABIC_SEMICOLON
+from ..const import GRAMPS_LOCALE as glocale
 
 _ = glocale.translation.sgettext
 from ..lib.name import Name
@@ -393,8 +396,8 @@ class NameDisplay:
         if only one surname, see if pa/ma should be considered as 'the' surname.
     """
 
-    format_funcs = {}
-    raw_format_funcs = {}
+    format_funcs: Dict[str, Callable] = {}
+    raw_format_funcs: Dict[str, Callable] = {}
 
     def __init__(self, xlocale=glocale):
         """

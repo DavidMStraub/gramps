@@ -26,21 +26,22 @@
 
 """base class for generating dialogs for graph-based reports """
 
+import os
+
 # ------------------------------------------------------------------------
 #
 # python modules
 #
 # ------------------------------------------------------------------------
 from abc import ABCMeta, abstractmethod
-import os
+from typing import Any, Dict, List
 
 # -------------------------------------------------------------------------------
 #
 # GTK+ modules
 #
 # -------------------------------------------------------------------------------
-from gi.repository import Gtk
-from gi.repository import GObject
+from gi.repository import GObject, Gtk
 
 # -------------------------------------------------------------------------------
 #
@@ -50,12 +51,13 @@ from gi.repository import GObject
 from gramps.gen.const import GRAMPS_LOCALE as glocale
 
 _ = glocale.translation.gettext
-from gramps.gen.config import config
-from gramps.gen.plug.report import CATEGORY_GRAPHVIZ
-from ._reportdialog import ReportDialog
-from ._papermenu import PaperFrame
 import gramps.gen.plug.docgen.graphdoc as graphdoc
+from gramps.gen.config import config
 from gramps.gen.plug.menu import Menu
+from gramps.gen.plug.report import CATEGORY_GRAPHVIZ
+
+from ._papermenu import PaperFrame
+from ._reportdialog import ReportDialog
 
 
 # -------------------------------------------------------------------------------
@@ -68,7 +70,7 @@ class BaseFormatComboBox(Gtk.ComboBox):
     Combo box base class for graph-based report format choices.
     """
 
-    FORMATS = []
+    FORMATS: List[Dict[str, Any]] = []
 
     def set(self, active=None):
         """initialize the Graphviz choices"""

@@ -26,9 +26,8 @@
 from gramps.gen.const import GRAMPS_LOCALE as glocale
 
 _ = glocale.translation.gettext
-import pickle
-
 import logging
+import pickle
 
 _LOG = logging.getLogger(".objectentries")
 
@@ -37,26 +36,26 @@ _LOG = logging.getLogger(".objectentries")
 # GTK/Gnome modules
 #
 # -------------------------------------------------------------------------
-from gi.repository import Gdk
-from gi.repository import Gtk
-from gi.repository import Pango
+from gi.repository import Gdk, Gtk, Pango
+
+from gramps.gen.display.name import displayer as name_displayer
+from gramps.gen.display.place import displayer as place_displayer
+from gramps.gen.errors import WindowActiveError
 
 # -------------------------------------------------------------------------
 #
 # Gramps modules
 #
 # -------------------------------------------------------------------------
-from gramps.gen.lib import Person, Place, Source, Media, Note
+from gramps.gen.lib import Media, Note, Person, Place, Source
+
+from ..ddtargets import DdTargets
+from ..selectors import SelectorFactory
+from .editmedia import EditMedia
+from .editnote import EditNote
 from .editperson import EditPerson
 from .editplace import EditPlace
 from .editsource import EditSource
-from .editmedia import EditMedia
-from .editnote import EditNote
-from ..selectors import SelectorFactory
-from ..ddtargets import DdTargets
-from gramps.gen.errors import WindowActiveError
-from gramps.gen.display.place import displayer as place_displayer
-from gramps.gen.display.name import displayer as name_displayer
 
 
 # -------------------------------------------------------------------------
@@ -78,7 +77,7 @@ class ObjEntry:
     ADD_STR = ""
     DEL_STR = ""
     _DND_TYPE = None
-    _DND_ICON = None
+    _DND_ICON = ""
 
     def __init__(
         self,
