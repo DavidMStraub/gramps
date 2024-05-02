@@ -19,23 +19,47 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #
 
+import ast
+import bisect
+import datetime
+import glob
+import logging
+import os
+import pickle
+
 # ------------------------------------------------------------------------
 #
 # Python Modules
 #
 # ------------------------------------------------------------------------
 import random
-import pickle
-import time
 import re
-import os
-import logging
-import bisect
-import ast
 import sys
-import datetime
-import glob
+import time
 from pathlib import Path
+from typing import Any, Dict
+
+from ..config import config
+from ..const import GRAMPS_LOCALE as glocale
+from ..errors import HandleError
+from ..lib import (
+    Citation,
+    Event,
+    Family,
+    Media,
+    NameOriginType,
+    Note,
+    Person,
+    Place,
+    Repository,
+    Source,
+    Tag,
+)
+from ..lib.genderstats import GenderStats
+from ..lib.researcher import Researcher
+from ..updatecallback import UpdateCallback
+from ..utils.callback import Callback
+from ..utils.id import create_id
 
 # ------------------------------------------------------------------------
 #
@@ -43,54 +67,32 @@ from pathlib import Path
 #
 # ------------------------------------------------------------------------
 from . import (
-    DbReadBase,
-    DbWriteBase,
-    DbUndo,
-    DBLOGNAME,
-    DBUNDOFN,
-    REFERENCE_KEY,
-    PERSON_KEY,
-    FAMILY_KEY,
     CITATION_KEY,
-    SOURCE_KEY,
-    EVENT_KEY,
-    MEDIA_KEY,
-    PLACE_KEY,
-    REPOSITORY_KEY,
-    NOTE_KEY,
-    TAG_KEY,
-    TXNADD,
-    TXNUPD,
-    TXNDEL,
-    KEY_TO_NAME_MAP,
+    DBLOGNAME,
     DBMODE_R,
     DBMODE_W,
+    DBUNDOFN,
+    EVENT_KEY,
+    FAMILY_KEY,
+    KEY_TO_NAME_MAP,
+    MEDIA_KEY,
+    NOTE_KEY,
+    PERSON_KEY,
+    PLACE_KEY,
+    REFERENCE_KEY,
+    REPOSITORY_KEY,
+    SOURCE_KEY,
+    TAG_KEY,
+    TXNADD,
+    TXNDEL,
+    TXNUPD,
+    DbReadBase,
+    DbUndo,
+    DbWriteBase,
 )
-from .utils import write_lock_file, clear_lock_file
-from .exceptions import DbVersionError, DbUpgradeRequiredError
-from ..errors import HandleError
-from ..utils.callback import Callback
-from ..updatecallback import UpdateCallback
 from .bookmarks import DbBookmarks
-
-from ..utils.id import create_id
-from ..lib.researcher import Researcher
-from ..lib import (
-    Tag,
-    Media,
-    Person,
-    Family,
-    Source,
-    Citation,
-    Event,
-    Place,
-    Repository,
-    Note,
-    NameOriginType,
-)
-from ..lib.genderstats import GenderStats
-from ..config import config
-from ..const import GRAMPS_LOCALE as glocale
+from .exceptions import DbUpgradeRequiredError, DbVersionError
+from .utils import clear_lock_file, write_lock_file
 
 _ = glocale.translation.gettext
 
@@ -337,7 +339,7 @@ class DbGeneric(DbWriteBase, DbReadBase, UpdateCallback, Callback):
     A Gramps Database Backend. This replicates the grampsdb functions.
     """
 
-    __signals__ = dict(
+    __signals__: Dict[str, Any] = dict(
         (obj + "-" + op, signal)
         for obj in [
             "person",
