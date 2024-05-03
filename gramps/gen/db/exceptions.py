@@ -26,7 +26,7 @@
 #
 # -------------------------------------------------------------------------
 from ..const import GRAMPS_LOCALE as glocale
-from ..const import URL_MANUAL_PAGE, URL_WIKISTRING
+from ..const import URL_WIKISTRING, URL_MANUAL_PAGE
 
 _ = glocale.translation.gettext
 

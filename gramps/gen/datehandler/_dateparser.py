@@ -29,19 +29,19 @@ date parsing class. The default base class provides parsing for English.
 
 # -------------------------------------------------------------------------
 #
-# set up logging
+# Python modules
 #
 # -------------------------------------------------------------------------
 import re
 import calendar
+from typing import Dict, Set
 
 # -------------------------------------------------------------------------
 #
-# Python modules
+# set up logging
 #
 # -------------------------------------------------------------------------
 import logging
-from typing import Dict, Set
 
 log = logging.getLogger(".DateParser")
 

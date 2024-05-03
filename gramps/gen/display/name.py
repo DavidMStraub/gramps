@@ -52,7 +52,6 @@ Specific symbols for parts of a name are defined:
     ======  ===============================================================
 """
 
-import logging
 
 # -------------------------------------------------------------------------
 #
@@ -60,6 +59,7 @@ import logging
 #
 # -------------------------------------------------------------------------
 import re
+import logging
 from typing import Callable, Dict
 
 LOG = logging.getLogger(".gramps.gen")
@@ -69,8 +69,7 @@ LOG = logging.getLogger(".gramps.gen")
 # Gramps modules
 #
 # -------------------------------------------------------------------------
-from ..const import ARABIC_COMMA, ARABIC_SEMICOLON
-from ..const import GRAMPS_LOCALE as glocale
+from ..const import ARABIC_COMMA, ARABIC_SEMICOLON, GRAMPS_LOCALE as glocale
 
 _ = glocale.translation.sgettext
 from ..lib.name import Name
