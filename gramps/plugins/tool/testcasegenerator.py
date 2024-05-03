@@ -23,8 +23,6 @@
 #
 
 """Tools/Debug/Generate Testcases for Persons and Families"""
-import os
-import random
 
 # pylint: disable=too-many-statements,too-many-locals,too-many-branches
 # pylint: disable=wrong-import-position,too-many-public-methods,no-self-use
@@ -35,6 +33,8 @@ import random
 #
 # ------------------------------------------------------------------------
 import sys
+import os
+import random
 
 from gramps.gen.const import GRAMPS_LOCALE as glocale
 
@@ -46,10 +46,6 @@ _ = glocale.translation.gettext
 #
 # ------------------------------------------------------------------------
 from gi.repository import Gtk
-
-from gramps.gen.const import ICON, LOGO, SPLASH, URL_MANUAL_PAGE
-from gramps.gen.db import DbTxn
-from gramps.gen.db.dbconst import *
 
 # ------------------------------------------------------------------------
 #
@@ -83,9 +79,9 @@ from gramps.gen.lib import (
     Person,
     PersonRef,
     Place,
-    PlaceName,
-    PlaceRef,
     PlaceType,
+    PlaceRef,
+    PlaceName,
     RepoRef,
     Repository,
     RepositoryType,
@@ -93,9 +89,6 @@ from gramps.gen.lib import (
     SourceMediaType,
     SrcAttribute,
     SrcAttributeType,
-    StyledText,
-    StyledTextTag,
-    StyledTextTagType,
     Surname,
     Tag,
     Url,
@@ -103,6 +96,7 @@ from gramps.gen.lib import (
 )
 from gramps.gen.lib.addressbase import AddressBase
 from gramps.gen.lib.attrbase import AttributeBase
+from gramps.gen.lib.primaryobj import BasicPrimaryObject
 from gramps.gen.lib.citationbase import CitationBase
 from gramps.gen.lib.date import Today
 from gramps.gen.lib.datebase import DateBase
@@ -111,15 +105,19 @@ from gramps.gen.lib.locationbase import LocationBase
 from gramps.gen.lib.mediabase import MediaBase
 from gramps.gen.lib.notebase import NoteBase
 from gramps.gen.lib.placebase import PlaceBase
-from gramps.gen.lib.primaryobj import BasicPrimaryObject
 from gramps.gen.lib.privacybase import PrivacyBase
 from gramps.gen.lib.tagbase import TagBase
 from gramps.gen.lib.urlbase import UrlBase
+from gramps.gen.lib import StyledText, StyledTextTag, StyledTextTagType
+from gramps.gen.db import DbTxn
 from gramps.gen.mime import get_type
-from gramps.gen.utils.lds import TEMPLES
-from gramps.gen.utils.string import conf_strings
-from gramps.gui.display import display_help
 from gramps.gui.plug import tool
+from gramps.gen.utils.string import conf_strings
+from gramps.gen.utils.lds import TEMPLES
+from gramps.gen.db.dbconst import *
+from gramps.gen.const import ICON, LOGO, SPLASH
+from gramps.gui.display import display_help
+from gramps.gen.const import URL_MANUAL_PAGE
 
 # ------------------------------------------------------------------------
 #

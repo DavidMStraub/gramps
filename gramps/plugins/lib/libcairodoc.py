@@ -41,8 +41,6 @@ from math import radians
 import re
 from typing import List
 
-from gramps.gen.errors import PluginError
-from gramps.gen.plug.docbackend import CairoBackend
 
 # ------------------------------------------------------------------------
 #

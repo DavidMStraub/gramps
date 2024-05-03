@@ -19,18 +19,18 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
 """
 
-import codecs
 import os
-import random
 import sys
+import codecs
 import unittest
+import random
 
-from gramps.gen import const
-from gramps.gen.const import DATA_DIR, TEST_RANDOM
-from gramps.gen.user import User
-from gramps.gen.utils.config import config
-from gramps.gen.utils.id import set_det_id
 from gramps.test.test_util import Gramps
+from gramps.gen.const import DATA_DIR
+from gramps.gen.user import User
+from gramps.gen.utils.id import set_det_id
+from gramps.gen import const
+from gramps.gen.utils.config import config
 
 TREE_NAME = "Test_tooltest"
 TEST_DIR = os.path.abspath(os.path.join(DATA_DIR, "tests"))

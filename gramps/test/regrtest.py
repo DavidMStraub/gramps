@@ -29,6 +29,7 @@ Testing framework for performing a variety of unttests for Gramps.
 # TODO: review whether logging is really useful for unittest
 #  it does seem to work .. try -v5
 import logging
+
 import os
 import sys
 import unittest

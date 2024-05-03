@@ -20,10 +20,10 @@
 
 # test/GrampsLogger/ErrorReportAssistant_Test.py
 
-import logging
-import os
-import sys
 import unittest
+import logging
+import sys
+import os
 
 log = logging.getLogger("Gramps.Tests.GrampsLogger")
 import gramps.gen.const as const

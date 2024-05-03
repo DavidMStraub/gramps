@@ -30,6 +30,11 @@
 from xml.sax.saxutils import escape
 import os.path
 
+# -------------------------------------------------------------------------
+#
+# GTK modules
+#
+# -------------------------------------------------------------------------
 
 # ------------------------------------------------------------------------
 #
@@ -41,12 +46,6 @@ from gramps.plugins.lib.libhtml import Html, xml_lang
 from gramps.gen.errors import ReportError
 
 from gramps.gen.const import GRAMPS_LOCALE as glocale
-
-# -------------------------------------------------------------------------
-#
-# GTK modules
-#
-# -------------------------------------------------------------------------
 
 
 _ = glocale.translation.gettext

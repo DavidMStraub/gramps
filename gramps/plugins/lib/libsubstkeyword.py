@@ -33,19 +33,16 @@ Will return a value such as:
 Mary Smith was born on 3/28/1923.
 """
 
-from python import Tuple
-
-from gramps.gen.const import GRAMPS_LOCALE as glocale
-from gramps.gen.display.place import displayer as _pd
-
 # ------------------------------------------------------------------------
 #
 # Gramps modules
 #
 # ------------------------------------------------------------------------
-from gramps.gen.lib import EventType, Location, PlaceType
+from gramps.gen.lib import EventType, PlaceType, Location
 from gramps.gen.utils.db import get_birth_or_fallback, get_death_or_fallback
 from gramps.gen.utils.location import get_main_location
+from gramps.gen.display.place import displayer as _pd
+from gramps.gen.const import GRAMPS_LOCALE as glocale
 
 
 # ------------------------------------------------------------------------
@@ -503,8 +500,9 @@ class GrampsFormat:
     def parse_format(self):
         """Parse the Gramps format string.
         let the date or place classes handle any sub-format strings"""
-        from gramps.gen.utils.config import get_researcher
         from gramps.version import VERSION
+
+        from gramps.gen.utils.config import get_researcher
 
         owner = get_researcher()
 

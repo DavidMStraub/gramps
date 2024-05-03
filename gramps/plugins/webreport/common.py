@@ -27,21 +27,21 @@ This module is used to share variables, enums and functions between all modules
 
 """
 
-import logging
-import re
 from collections import defaultdict
 from hashlib import md5
+import re
+import logging
 from typing import List, Type, Union
 from xml.sax.saxutils import escape
 
 from gramps.gen.const import GRAMPS_LOCALE as glocale
 from gramps.gen.display.name import displayer as _nd
 from gramps.gen.display.place import displayer as _pd
-from gramps.gen.lib import Date, EventType
-from gramps.gen.plug import BasePluginManager
-from gramps.gen.plug.report import utils
 from gramps.gen.utils.db import get_death_or_fallback
-from gramps.plugins.lib.libgedcom import DATE_QUALITY, make_gedcom_date
+from gramps.gen.lib import EventType, Date
+from gramps.gen.plug import BasePluginManager
+from gramps.plugins.lib.libgedcom import make_gedcom_date, DATE_QUALITY
+from gramps.gen.plug.report import utils
 from gramps.plugins.lib.libhtml import Html
 
 HAVE_ICU = False
