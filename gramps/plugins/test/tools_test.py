@@ -26,7 +26,7 @@ import unittest
 import random
 
 from gramps.test.test_util import Gramps
-from gramps.gen.const import DATA_DIR
+from gramps.gen.const import DATA_DIR, TEST_RANDOM
 from gramps.gen.user import User
 from gramps.gen.utils.id import set_det_id
 from gramps.gen import const
