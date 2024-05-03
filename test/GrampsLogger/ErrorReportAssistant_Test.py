@@ -28,23 +28,23 @@ import unittest
 log = logging.getLogger("Gramps.Tests.GrampsLogger")
 import gramps.gen.const as const
 
-const.rootDir = os.path.join(os.path.dirname(__file__), "../../gramps")
-sys.path.append(os.path.join(const.rootDir, "test"))
+rootDir = os.path.join(os.path.dirname(__file__), "../../gramps")
+sys.path.append(os.path.join(rootDir, "test"))
 try:
     from guitest.gtktest import GtkTestCase
 
     TestCaseBase = GtkTestCase
     log.info("Using guitest")
 except:
-    TestCaseBase = unittest.TestCase  # type: ignore
+    TestCaseBase = unittest.TestCase
 
-sys.path.append(const.rootDir)
-sys.path.append(os.path.join(const.rootDir, "GrampsLogger"))
+sys.path.append(rootDir)
+sys.path.append(os.path.join(rootDir, "GrampsLogger"))
 
 from gramps.gui.logger import RotateHandler, _errorreportassistant
 
 
-class ErrorReportAssistantTest(TestCaseBase):
+class ErrorReportAssistantTest(TestCaseBase):  # type: ignore
     """Test the ErrorReportAssistant."""
 
     def test_buffer_recall(self):
