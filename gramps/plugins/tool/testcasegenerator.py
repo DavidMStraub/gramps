@@ -23,6 +23,9 @@
 #
 
 """Tools/Debug/Generate Testcases for Persons and Families"""
+import os
+import random
+
 # pylint: disable=too-many-statements,too-many-locals,too-many-branches
 # pylint: disable=wrong-import-position,too-many-public-methods,no-self-use
 # pylint: disable=too-many-arguments
@@ -32,8 +35,7 @@
 #
 # ------------------------------------------------------------------------
 import sys
-import os
-import random
+
 from gramps.gen.const import GRAMPS_LOCALE as glocale
 
 _ = glocale.translation.gettext
@@ -44,6 +46,10 @@ _ = glocale.translation.gettext
 #
 # ------------------------------------------------------------------------
 from gi.repository import Gtk
+
+from gramps.gen.const import ICON, LOGO, SPLASH, URL_MANUAL_PAGE
+from gramps.gen.db import DbTxn
+from gramps.gen.db.dbconst import *
 
 # ------------------------------------------------------------------------
 #
@@ -77,9 +83,9 @@ from gramps.gen.lib import (
     Person,
     PersonRef,
     Place,
-    PlaceType,
-    PlaceRef,
     PlaceName,
+    PlaceRef,
+    PlaceType,
     RepoRef,
     Repository,
     RepositoryType,
@@ -87,6 +93,9 @@ from gramps.gen.lib import (
     SourceMediaType,
     SrcAttribute,
     SrcAttributeType,
+    StyledText,
+    StyledTextTag,
+    StyledTextTagType,
     Surname,
     Tag,
     Url,
@@ -94,7 +103,6 @@ from gramps.gen.lib import (
 )
 from gramps.gen.lib.addressbase import AddressBase
 from gramps.gen.lib.attrbase import AttributeBase
-from gramps.gen.lib.primaryobj import BasicPrimaryObject
 from gramps.gen.lib.citationbase import CitationBase
 from gramps.gen.lib.date import Today
 from gramps.gen.lib.datebase import DateBase
@@ -103,19 +111,15 @@ from gramps.gen.lib.locationbase import LocationBase
 from gramps.gen.lib.mediabase import MediaBase
 from gramps.gen.lib.notebase import NoteBase
 from gramps.gen.lib.placebase import PlaceBase
+from gramps.gen.lib.primaryobj import BasicPrimaryObject
 from gramps.gen.lib.privacybase import PrivacyBase
 from gramps.gen.lib.tagbase import TagBase
 from gramps.gen.lib.urlbase import UrlBase
-from gramps.gen.lib import StyledText, StyledTextTag, StyledTextTagType
-from gramps.gen.db import DbTxn
 from gramps.gen.mime import get_type
-from gramps.gui.plug import tool
-from gramps.gen.utils.string import conf_strings
 from gramps.gen.utils.lds import TEMPLES
-from gramps.gen.db.dbconst import *
-from gramps.gen.const import ICON, LOGO, SPLASH
+from gramps.gen.utils.string import conf_strings
 from gramps.gui.display import display_help
-from gramps.gen.const import URL_MANUAL_PAGE
+from gramps.gui.plug import tool
 
 # ------------------------------------------------------------------------
 #
@@ -129,15 +133,11 @@ WIKI_HELP_SEC = _("Generate_Testcases_for_Persons_and_Families")
 # number generator.  The access is typically used for seeding the generator
 # to make it repeatable across runs.  The private copy is unaffected by other
 # uses of the global random() functions.
-try:
-    from gramps.gen.const import myrand
-except (NameError, ImportError):
-    myrand = random.Random()
-except:
-    print("Unexpected error:", sys.exc_info()[0])
-_random = myrand.random
-_choice = myrand.choice
-_randint = myrand.randint
+from gramps.gen.const import TEST_RANDOM
+
+_random = TEST_RANDOM.random
+_choice = TEST_RANDOM.choice
+_randint = TEST_RANDOM.randint
 
 
 LDS_ORD_BAPT_STATUS = (
