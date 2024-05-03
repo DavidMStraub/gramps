@@ -37,8 +37,6 @@ import uuid
 
 from gi.repository import GLib
 
-from ..version import DEV_VERSION, VERSION, VERSION_TUPLE, major_version
-from .constfunc import get_env_var
 
 # -------------------------------------------------------------------------
 #
@@ -46,8 +44,10 @@ from .constfunc import get_env_var
 #
 # -------------------------------------------------------------------------
 from .git_revision import get_git_revision
-from .utils.grampslocale import GrampsLocale
+from .constfunc import get_env_var
+from ..version import VERSION, VERSION_TUPLE, major_version, DEV_VERSION
 from .utils.resourcepath import ResourcePath
+from .utils.grampslocale import GrampsLocale
 
 # -------------------------------------------------------------------------
 #

@@ -46,7 +46,6 @@ methods should be changed to generate exceptions. Possibly by globally changing
 'LOG.debug' to 'raise DbException'.
 """
 
-import inspect
 
 # -------------------------------------------------------------------------
 #
@@ -54,15 +53,12 @@ import inspect
 #
 # -------------------------------------------------------------------------
 import logging
+import inspect
 from abc import ABCMeta
-from functools import wraps
 from types import FunctionType
+from functools import wraps
 from typing import Any, Dict
 
-from ..const import GRAMPS_LOCALE as glocale
-from ..errors import HandleError
-from ..lib import Researcher
-from ..utils.callback import Callback
 
 # -------------------------------------------------------------------------
 #
@@ -72,6 +68,10 @@ from ..utils.callback import Callback
 from .base import DbReadBase
 from .bookmarks import DbBookmarks
 from .dbconst import DBLOGNAME
+from ..errors import HandleError
+from ..utils.callback import Callback
+from ..lib import Researcher
+from ..const import GRAMPS_LOCALE as glocale
 
 LOG = logging.getLogger(DBLOGNAME)
 

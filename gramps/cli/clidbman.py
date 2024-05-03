@@ -25,8 +25,6 @@ Provide the management of databases from CLI. This includes opening, renaming,
 creating, and deleting of databases.
 """
 
-import logging
-import os
 
 # -------------------------------------------------------------------------
 #
@@ -34,18 +32,15 @@ import os
 #
 # -------------------------------------------------------------------------
 import re
+import os
 import sys
-import tempfile
 import time
 from typing import Dict, Optional
 from urllib.parse import urlparse
-from urllib.request import url2pathname, urlopen
+from urllib.request import urlopen, url2pathname
+import tempfile
+import logging
 
-from gramps.gen.config import config
-from gramps.gen.const import GRAMPS_LOCALE as glocale
-from gramps.gen.constfunc import win
-from gramps.gen.db.dbconst import DBBACKEND, DBLOGNAME
-from gramps.gen.db.utils import get_dbid_from_path, make_database
 
 # -------------------------------------------------------------------------
 #
@@ -53,6 +48,11 @@ from gramps.gen.db.utils import get_dbid_from_path, make_database
 #
 # -------------------------------------------------------------------------
 from gramps.gen.plug import BasePluginManager
+from gramps.gen.config import config
+from gramps.gen.constfunc import win
+from gramps.gen.db.dbconst import DBLOGNAME, DBBACKEND
+from gramps.gen.db.utils import make_database, get_dbid_from_path
+from gramps.gen.const import GRAMPS_LOCALE as glocale
 
 _ = glocale.translation.gettext
 

@@ -26,26 +26,25 @@ Date parsing class. Serves as the base class for any localized
 date parsing class. The default base class provides parsing for English.
 """
 
-import calendar
 
 # -------------------------------------------------------------------------
 #
 # set up logging
 #
 # -------------------------------------------------------------------------
-import logging
+import re
+import calendar
 
 # -------------------------------------------------------------------------
 #
 # Python modules
 #
 # -------------------------------------------------------------------------
-import re
+import logging
 from typing import Dict, Set
 
 log = logging.getLogger(".DateParser")
 
-from ..const import GRAMPS_LOCALE as glocale
 
 # -------------------------------------------------------------------------
 #
@@ -53,6 +52,7 @@ from ..const import GRAMPS_LOCALE as glocale
 #
 # -------------------------------------------------------------------------
 from ..lib.date import Date, DateError, Today
+from ..const import GRAMPS_LOCALE as glocale
 from ..utils.grampslocale import GrampsLocale
 from ._datestrings import DateStrings
 

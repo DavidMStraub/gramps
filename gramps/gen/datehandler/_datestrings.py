@@ -291,18 +291,17 @@ class DateStrings:
 
 # set GRAMPS_RESOURCES then: python3 -m gramps.gen.datehandler._datestrings
 if __name__ == "__main__":
-    import gettext
     import sys
-
-    from ..const import GRAMPS_LOCALE as glocale
     from ..utils.grampslocale import GrampsLocale
-    from ._datedisplay import DateDisplay
-    from ._grampslocale import _deprecated_long_days as old_days
-    from ._grampslocale import _deprecated_long_months as old_long
+    from ..const import GRAMPS_LOCALE as glocale
     from ._grampslocale import (
+        _deprecated_long_months as old_long,
+        _deprecated_short_months as old_short,
         _deprecated_short_days as old_short_days,  # Icelandic needs them
+        _deprecated_long_days as old_days,
     )
-    from ._grampslocale import _deprecated_short_months as old_short
+    from ._datedisplay import DateDisplay
+    import gettext
 
     lang = glocale.lang
     lang_short = lang[:2]

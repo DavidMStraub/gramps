@@ -43,7 +43,6 @@ from typing import Tuple
 
 log = logging.getLogger(".DateDisplay")
 
-from ..const import GRAMPS_LOCALE as glocale
 
 # -------------------------------------------------------------------------
 #
@@ -51,6 +50,7 @@ from ..const import GRAMPS_LOCALE as glocale
 #
 # -------------------------------------------------------------------------
 from ..lib.date import Date
+from ..const import GRAMPS_LOCALE as glocale
 from ..utils.grampslocale import GrampsLocale
 from ._datestrings import DateStrings
 
