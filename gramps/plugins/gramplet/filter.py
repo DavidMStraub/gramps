@@ -37,15 +37,15 @@ from typing import Any
 # -------------------------------------------------------------------------
 from gramps.gen.plug import Gramplet
 from gramps.gui.filters.sidebar import (
-    CitationSidebarFilter,
-    EventSidebarFilter,
-    FamilySidebarFilter,
-    MediaSidebarFilter,
-    NoteSidebarFilter,
     PersonSidebarFilter,
-    PlaceSidebarFilter,
-    RepoSidebarFilter,
+    FamilySidebarFilter,
+    EventSidebarFilter,
     SourceSidebarFilter,
+    CitationSidebarFilter,
+    PlaceSidebarFilter,
+    MediaSidebarFilter,
+    RepoSidebarFilter,
+    NoteSidebarFilter,
 )
 
 
@@ -59,7 +59,7 @@ class Filter(Gramplet):
     The base class for all filter gramplets.
     """
 
-    FILTER_CLASS = Any
+    FILTER_CLASS: Any = None
 
     def init(self):
         self.filter = self.FILTER_CLASS(

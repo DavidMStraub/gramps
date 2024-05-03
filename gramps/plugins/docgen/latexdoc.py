@@ -48,7 +48,6 @@ try:
 except ImportError:
     HAVE_PIL = False
 
-
 # ----------------------------------------------------------------------- -
 #
 # Gramps modules
@@ -57,8 +56,8 @@ except ImportError:
 from gramps.gen.plug.docgen import (
     BaseDoc,
     TextDoc,
-    FONT_SANS_SERIF,
     PAPER_LANDSCAPE,
+    FONT_SANS_SERIF,
     URL_PATTERN,
 )
 from gramps.gen.plug.docbackend import DocBackend

@@ -22,7 +22,6 @@
 Provide the base class for GRAMPS' DataView classes
 """
 
-
 # ----------------------------------------------------------------
 #
 # python modules
@@ -41,11 +40,9 @@ _LOG = logging.getLogger(".pageview")
 # ----------------------------------------------------------------
 from gi.repository import Gtk
 from gi.repository import Gdk
-
 from gramps.gen.const import GRAMPS_LOCALE as glocale
 
 _ = glocale.translation.gettext
-
 
 # ----------------------------------------------------------------
 #
@@ -278,7 +275,6 @@ class PageView(DbGUIElement, metaclass=ABCMeta):
         system.
         """
         import pickle
-
         from ..clipboard import ClipboardWindow, obj2target
 
         handled = False

@@ -59,7 +59,6 @@ from ._reportdialog import ReportDialog
 from ._papermenu import PaperFrame
 import gramps.gen.plug.docgen.graphdoc as graphdoc
 from gramps.gen.plug.menu import Menu
-from ._reportdialog import ReportDialog
 
 
 # -------------------------------------------------------------------------------

@@ -54,7 +54,7 @@ _ = glocale.translation.gettext
 # -------------------------------------------------------------------------
 from ..config import config
 from ..constfunc import win
-from . import DocGenPlugin, ExportPlugin, ImportPlugin, PluginRegister
+from . import PluginRegister, ImportPlugin, ExportPlugin, DocGenPlugin
 
 # -------------------------------------------------------------------------
 #

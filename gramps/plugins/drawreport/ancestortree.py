@@ -31,7 +31,6 @@
 
 from typing import Any, Dict
 
-from gramps.gen.const import GRAMPS_LOCALE as glocale
 
 # ------------------------------------------------------------------------
 #
@@ -39,29 +38,30 @@ from gramps.gen.const import GRAMPS_LOCALE as glocale
 #
 # ------------------------------------------------------------------------
 
+from gramps.gen.const import GRAMPS_LOCALE as glocale
 
 _ = glocale.translation.sgettext
-from gramps.gen.display.name import displayer as _nd
 from gramps.gen.errors import ReportError
-from gramps.gen.plug.docgen import (
-    FONT_SANS_SERIF,
-    PARA_ALIGN_CENTER,
-    FontStyle,
-    GraphicsStyle,
-    ParagraphStyle,
-)
 from gramps.gen.plug.menu import (
+    TextOption,
+    NumberOption,
     BooleanOption,
     EnumeratedListOption,
-    NumberOption,
-    PersonOption,
     StringOption,
-    TextOption,
+    PersonOption,
 )
-from gramps.gen.plug.report import MenuReportOptions, Report, stdoptions
-from gramps.gen.proxy import CacheProxyDb
-from gramps.plugins.lib.librecurse import AscendPerson
+from gramps.gen.plug.report import Report, MenuReportOptions, stdoptions
+from gramps.gen.plug.docgen import (
+    FontStyle,
+    ParagraphStyle,
+    GraphicsStyle,
+    FONT_SANS_SERIF,
+    PARA_ALIGN_CENTER,
+)
 from gramps.plugins.lib.libtreebase import *
+from gramps.plugins.lib.librecurse import AscendPerson
+from gramps.gen.proxy import CacheProxyDb
+from gramps.gen.display.name import displayer as _nd
 
 PT2CM = utils.pt2cm
 # cm2pt = utils.cm2pt
