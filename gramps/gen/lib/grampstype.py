@@ -24,19 +24,19 @@ Base type for all gramps types.
 """
 
 
+# ---------------------------------------------------------------
+#
+# Python modules
+#
+# ---------------------------------------------------------------
+from typing import Dict, List, Optional, Tuple
+
 # -------------------------------------------------------------------------
 #
 # Gramps modules
 #
 # -------------------------------------------------------------------------
 from ..const import GRAMPS_LOCALE as glocale
-
-# ---------------------------------------------------------------
-#
-# Python modules
-#
-# ---------------------------------------------------------------
-from .typing import Dict, List, Optional, Tuple
 
 _ = glocale.translation.gettext
 
