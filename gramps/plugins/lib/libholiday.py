@@ -21,10 +21,6 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-import datetime
-import math
-import os
-from typing import List
 
 # ------------------------------------------------------------------------
 #
@@ -32,6 +28,10 @@ from typing import List
 #
 # ------------------------------------------------------------------------
 from xml.parsers import expat
+import datetime
+import math
+import os
+from typing import List
 
 # ------------------------------------------------------------------------
 #
@@ -41,7 +41,7 @@ from xml.parsers import expat
 from gramps.gen.const import GRAMPS_LOCALE as glocale
 
 _ = glocale.translation.gettext
-from gramps.gen.const import DATA_DIR, PLUGINS_DIR, USER_PLUGINS
+from gramps.gen.const import PLUGINS_DIR, USER_PLUGINS, DATA_DIR
 from gramps.gen.lib.gcalendar import gregorian_ymd, hebrew_sdn
 
 

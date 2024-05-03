@@ -21,7 +21,6 @@
 """Html and Html format management for the different reports
 """
 
-import os.path
 
 # ------------------------------------------------------------------------
 #
@@ -29,9 +28,8 @@ import os.path
 #
 # ------------------------------------------------------------------------
 from xml.sax.saxutils import escape
+import os.path
 
-from gramps.gen.const import GRAMPS_LOCALE as glocale
-from gramps.gen.errors import ReportError
 
 # ------------------------------------------------------------------------
 #
@@ -40,6 +38,9 @@ from gramps.gen.errors import ReportError
 # ------------------------------------------------------------------------
 from gramps.gen.plug.docbackend import DocBackend
 from gramps.plugins.lib.libhtml import Html, xml_lang
+from gramps.gen.errors import ReportError
+
+from gramps.gen.const import GRAMPS_LOCALE as glocale
 
 # -------------------------------------------------------------------------
 #

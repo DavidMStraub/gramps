@@ -37,14 +37,8 @@
 from gramps.gen.const import GRAMPS_LOCALE as glocale
 
 _ = glocale.translation.gettext
-# ------------------------------------------------------------------------
-#
-# Set up logging
-#
-# ------------------------------------------------------------------------
-import logging
-import re
 from math import radians
+import re
 from typing import List
 
 from gramps.gen.errors import PluginError
@@ -56,21 +50,30 @@ from gramps.gen.plug.docbackend import CairoBackend
 #
 # ------------------------------------------------------------------------
 from gramps.gen.plug.docgen import (
-    FONT_MONOSPACE,
-    FONT_SANS_SERIF,
-    FONT_SERIF,
-    PARA_ALIGN_CENTER,
-    PARA_ALIGN_LEFT,
-    SOLID,
     BaseDoc,
+    TextDoc,
     DrawDoc,
     ParagraphStyle,
     TableCellStyle,
-    TextDoc,
+    SOLID,
+    FONT_SANS_SERIF,
+    FONT_SERIF,
+    FONT_MONOSPACE,
+    PARA_ALIGN_CENTER,
+    PARA_ALIGN_LEFT,
 )
 from gramps.gen.plug.report import utils
+from gramps.gen.errors import PluginError
+from gramps.gen.plug.docbackend import CairoBackend
 from gramps.gen.utils.image import resize_to_buffer
 from gramps.gui.utils import SystemFonts
+
+# ------------------------------------------------------------------------
+#
+# Set up logging
+#
+# ------------------------------------------------------------------------
+import logging
 
 log = logging.getLogger(".libcairodoc")
 
@@ -1098,7 +1101,7 @@ class GtkDocPicture(GtkDocBaseElement):
             return (None, self), 0
 
     def draw(self, cr, layout, width, dpi_x, dpi_y):
-        from gi.repository import Gdk, Gtk
+        from gi.repository import Gtk, Gdk
 
         img_width = self._width * dpi_x / 2.54
         img_height = self._height * dpi_y / 2.54
