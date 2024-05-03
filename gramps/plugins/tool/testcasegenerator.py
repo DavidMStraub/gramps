@@ -131,11 +131,15 @@ WIKI_HELP_SEC = _("Generate_Testcases_for_Persons_and_Families")
 # number generator.  The access is typically used for seeding the generator
 # to make it repeatable across runs.  The private copy is unaffected by other
 # uses of the global random() functions.
-from gramps.gen.const import TEST_RANDOM
-
-_random = TEST_RANDOM.random
-_choice = TEST_RANDOM.choice
-_randint = TEST_RANDOM.randint
+try:
+    from gramps.gen.const import myrand
+except (NameError, ImportError):
+    myrand = random.Random()
+except:
+    print("Unexpected error:", sys.exc_info()[0])
+_random = myrand.random
+_choice = myrand.choice
+_randint = myrand.randint
 
 
 LDS_ORD_BAPT_STATUS = (
