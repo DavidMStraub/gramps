@@ -34,7 +34,7 @@ rootDir = os.path.join(os.path.dirname(__file__), "../../gramps")
 sys.path.append(os.path.join(rootDir, "test"))
 sys.path.append(rootDir)
 
-from gramps.gui.logger import GtkHandler, RotateHandler
+from gramps.gui.logger import RotateHandler, GtkHandler
 
 
 class GtkHandlerTest(unittest.TestCase):
