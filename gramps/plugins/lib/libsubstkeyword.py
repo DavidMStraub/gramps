@@ -33,6 +33,8 @@ Will return a value such as:
 Mary Smith was born on 3/28/1923.
 """
 
+from typing import Tuple
+
 # ------------------------------------------------------------------------
 #
 # Gramps modules
