@@ -95,7 +95,7 @@ class PageView(DbGUIElement, metaclass=ABCMeta):
       placed behind the same button in the sidebar
     """
 
-    CONFIGSETTINGS: Tuple(Tuple[str, Any], ...) = tuple()
+    CONFIGSETTINGS: Tuple[Tuple[str, Any], ...] = tuple()
 
     def __init__(self, title, pdata, dbstate, uistate):
         self.title = title

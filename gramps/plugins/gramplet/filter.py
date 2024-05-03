@@ -25,20 +25,27 @@ Module providing a gramplet interface to the sidebar filters.
 
 # -------------------------------------------------------------------------
 #
+# Python modules
+#
+# -------------------------------------------------------------------------
+from typing import Any
+
+# -------------------------------------------------------------------------
+#
 # Gramps modules
 #
 # -------------------------------------------------------------------------
 from gramps.gen.plug import Gramplet
 from gramps.gui.filters.sidebar import (
-    PersonSidebarFilter,
-    FamilySidebarFilter,
-    EventSidebarFilter,
-    SourceSidebarFilter,
     CitationSidebarFilter,
-    PlaceSidebarFilter,
+    EventSidebarFilter,
+    FamilySidebarFilter,
     MediaSidebarFilter,
-    RepoSidebarFilter,
     NoteSidebarFilter,
+    PersonSidebarFilter,
+    PlaceSidebarFilter,
+    RepoSidebarFilter,
+    SourceSidebarFilter,
 )
 
 
@@ -52,7 +59,7 @@ class Filter(Gramplet):
     The base class for all filter gramplets.
     """
 
-    FILTER_CLASS = None
+    FILTER_CLASS = Any
 
     def init(self):
         self.filter = self.FILTER_CLASS(

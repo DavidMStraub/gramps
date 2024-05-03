@@ -23,6 +23,8 @@
 """
 This module is the base class for all geography view module
 """
+import logging
+
 # -------------------------------------------------------------------------
 #
 # Python modules
@@ -31,7 +33,8 @@ This module is the base class for all geography view module
 import os
 import re
 import time
-import logging
+from typing import Any, Tuple
+
 import gi
 
 # -------------------------------------------------------------------------
@@ -39,9 +42,12 @@ import gi
 # GTK/Gnome modules
 #
 # -------------------------------------------------------------------------
-from gi.repository import GLib
-from gi.repository import Gtk
+from gi.repository import GLib, Gtk
 from gi.repository import OsmGpsMap as osmgpsmap
+
+from gramps.gen.config import config
+from gramps.gen.const import GRAMPS_LOCALE as glocale
+from gramps.gen.const import USER_HOME
 
 # -------------------------------------------------------------------------
 #
@@ -49,25 +55,22 @@ from gi.repository import OsmGpsMap as osmgpsmap
 #
 # -------------------------------------------------------------------------
 from gramps.gen.db import DbTxn
-from gramps.gen.lib import EventType, Place, PlaceRef, PlaceName
 from gramps.gen.display.name import displayer as _nd
 from gramps.gen.display.place import displayer as _pd
-from gramps.gui.views.navigationview import NavigationView
-from gramps.gen.utils.libformatting import FormattingHelper
 from gramps.gen.errors import WindowActiveError
-from gramps.gen.const import USER_HOME
-from gramps.gen.config import config
-from gramps.gui.editors import EditPlace, EditEvent, EditFamily, EditPerson
-from gramps.gui.selectors.selectplace import SelectPlace
+from gramps.gen.lib import EventType, Place, PlaceName, PlaceRef
 from gramps.gen.utils.file import media_path_full
-from gramps.gen.const import GRAMPS_LOCALE as glocale
+from gramps.gen.utils.libformatting import FormattingHelper
+from gramps.gui.editors import EditEvent, EditFamily, EditPerson, EditPlace
+from gramps.gui.selectors.selectplace import SelectPlace
+from gramps.gui.views.navigationview import NavigationView
 
 from . import constants
-from .osmgps import OsmGps
-from .selectionlayer import SelectionLayer
-from .placeselection import PlaceSelection
 from .cairoprint import CairoPrintSave
 from .libkml import Kml
+from .osmgps import OsmGps
+from .placeselection import PlaceSelection
+from .selectionlayer import SelectionLayer
 
 gi.require_version("OsmGpsMap", "1.0")
 
@@ -116,7 +119,7 @@ class GeoGraphyView(OsmGps, NavigationView):
     """
 
     # settings in the config file
-    CONFIGSETTINGS = (
+    CONFIGSETTINGS: Tuple[Tuple[str, Any], ...] = (
         ("geography.path", constants.GEOGRAPHY_PATH),
         ("geography.zoom", 10),
         ("geography.zoom_when_center", 12),

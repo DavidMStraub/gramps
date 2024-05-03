@@ -34,6 +34,7 @@
 #
 # -------------------------------------------------------------------------
 import math
+
 import cairo
 
 # -------------------------------------------------------------------------
@@ -42,22 +43,23 @@ import cairo
 #
 # -------------------------------------------------------------------------
 from gramps.gen.plug.report.utils import find_spouse
+
 from ..utils import hex_to_rgb
 from .fanchart import (
-    FanChartBaseWidget,
-    FanChartGrampsGUI,
-    PAD_PX,
-    TRANSLATE_PX,
+    BACKGROUND_GRAD_AGE,
+    BACKGROUND_GRAD_GEN,
+    BACKGROUND_GRAD_PERIOD,
+    CHILDRING_WIDTH,
+    COLLAPSED,
+    EXPANDED,
     FORM_CIRCLE,
     FORM_HALFCIRCLE,
     FORM_QUADRANT,
     NORMAL,
-    EXPANDED,
-    COLLAPSED,
-    BACKGROUND_GRAD_GEN,
-    BACKGROUND_GRAD_AGE,
-    BACKGROUND_GRAD_PERIOD,
-    CHILDRING_WIDTH,
+    PAD_PX,
+    TRANSLATE_PX,
+    FanChartBaseWidget,
+    FanChartGrampsGUI,
 )
 
 # -------------------------------------------------------------------------
@@ -661,7 +663,7 @@ class FanChartDescWidget(FanChartBaseWidget):
         # find what person is in this position:
         selected = None
         if not (generation is None) and generation > 0:
-            selected = self.personpos_at_angle(generation, rads, btype)
+            selected = self.personpos_at_angle_btype(generation, rads, btype)
         elif generation == -2:
             for idx, (start, stop, dummy) in enumerate(self.angle[generation]):
                 if self.radian_in_bounds(start, raw_rads, stop):
@@ -693,7 +695,7 @@ class FanChartDescWidget(FanChartBaseWidget):
             self.draw_innerring(ctx, data[0], data[1], startangle, angleinc)
             startangle += angleinc
 
-    def personpos_at_angle(self, generation, rads, btype):
+    def personpos_at_angle_btype(self, generation, rads, btype):
         """
         returns the person in generation generation at angle.
         """

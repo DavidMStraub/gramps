@@ -29,36 +29,39 @@
 #
 # ------------------------------------------------------------------------
 
+from typing import Any, Dict
+
+from gramps.gen.const import GRAMPS_LOCALE as glocale
+
 # ------------------------------------------------------------------------
 #
 # Gramps modules
 #
 # ------------------------------------------------------------------------
 
-from gramps.gen.const import GRAMPS_LOCALE as glocale
 
 _ = glocale.translation.sgettext
+from gramps.gen.display.name import displayer as _nd
 from gramps.gen.errors import ReportError
-from gramps.gen.plug.menu import (
-    TextOption,
-    NumberOption,
-    BooleanOption,
-    EnumeratedListOption,
-    StringOption,
-    PersonOption,
-)
-from gramps.gen.plug.report import Report, MenuReportOptions, stdoptions
 from gramps.gen.plug.docgen import (
-    FontStyle,
-    ParagraphStyle,
-    GraphicsStyle,
     FONT_SANS_SERIF,
     PARA_ALIGN_CENTER,
+    FontStyle,
+    GraphicsStyle,
+    ParagraphStyle,
 )
-from gramps.plugins.lib.libtreebase import *
-from gramps.plugins.lib.librecurse import AscendPerson
+from gramps.gen.plug.menu import (
+    BooleanOption,
+    EnumeratedListOption,
+    NumberOption,
+    PersonOption,
+    StringOption,
+    TextOption,
+)
+from gramps.gen.plug.report import MenuReportOptions, Report, stdoptions
 from gramps.gen.proxy import CacheProxyDb
-from gramps.gen.display.name import displayer as _nd
+from gramps.plugins.lib.librecurse import AscendPerson
+from gramps.plugins.lib.libtreebase import *
 
 PT2CM = utils.pt2cm
 # cm2pt = utils.cm2pt
@@ -531,7 +534,7 @@ class GUIConnect:
       get the value from a GUI variable
     """
 
-    __shared_state = {}
+    __shared_state: Dict[str, Any] = {}
 
     def __init__(self):  # We are BORG!
         self.__dict__ = self.__shared_state

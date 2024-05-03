@@ -28,14 +28,13 @@
 #
 # ------------------------------------------------------------------------
 import logging
-import os.path
 
 # ------------------------------------------------------------------------
 #
 # Python modules
 #
 # ------------------------------------------------------------------------
-from xml.sax.saxutils import escape
+from typing import Dict
 
 # ------------------------------------------------------------------------
 #
@@ -77,7 +76,7 @@ class OdfBackend(DocBackend):
     Implementation for open document format docs
     """
 
-    STYLETAG_TO_PROPERTY = {}
+    STYLETAG_TO_PROPERTY: Dict[int, str] = {}
 
     # overwrite base class attributes, they become static var of CairoDoc
     SUPPORTED_MARKUP = [

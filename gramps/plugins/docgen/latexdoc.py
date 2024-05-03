@@ -40,6 +40,7 @@ import re
 #
 # ------------------------------------------------------------------------
 from bisect import bisect
+from typing import List
 
 try:
     from PIL import Image
@@ -699,7 +700,7 @@ class LaTeXDoc(BaseDoc, TextDoc):
     pict_in_table = False
     pict_width = 0
     pict_height = 0
-    textmem = []
+    textmem: List[str] = []
     in_title = True
 
     #   ---------------------------------------------------------------

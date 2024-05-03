@@ -36,6 +36,7 @@ import pickle
 from abc import abstractmethod
 from collections import deque
 from time import perf_counter
+from typing import List, Optional, Tuple
 
 LOG = logging.getLogger(".gui.listview")
 
@@ -93,7 +94,7 @@ ICON = 3
 #
 # ----------------------------------------------------------------
 class ListView(NavigationView):
-    COLUMNS = []
+    COLUMNS: List[Tuple[str, int, Optional[str]]] = []
     # listview config settings that are always present related to the columns
     CONFIGSETTINGS = (
         ("columns.visible", []),

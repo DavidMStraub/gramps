@@ -29,13 +29,12 @@ Testing framework for performing a variety of unttests for Gramps.
 # TODO: review whether logging is really useful for unittest
 #  it does seem to work .. try -v5
 import logging
-
 import os
 import sys
 import unittest
 from optparse import OptionParser
 
-from .test import test_util as tu
+from ..test import test_util as tu
 
 gramps_root = tu.path_append_parent()
 

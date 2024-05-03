@@ -27,20 +27,21 @@ This module is used to share variables, enums and functions between all modules
 
 """
 
+import logging
+import re
 from collections import defaultdict
 from hashlib import md5
-import re
-import logging
+from typing import List, Type, Union
 from xml.sax.saxutils import escape
 
 from gramps.gen.const import GRAMPS_LOCALE as glocale
 from gramps.gen.display.name import displayer as _nd
 from gramps.gen.display.place import displayer as _pd
-from gramps.gen.utils.db import get_death_or_fallback
-from gramps.gen.lib import EventType, Date
+from gramps.gen.lib import Date, EventType
 from gramps.gen.plug import BasePluginManager
-from gramps.plugins.lib.libgedcom import make_gedcom_date, DATE_QUALITY
 from gramps.gen.plug.report import utils
+from gramps.gen.utils.db import get_death_or_fallback
+from gramps.plugins.lib.libgedcom import DATE_QUALITY, make_gedcom_date
 from gramps.plugins.lib.libhtml import Html
 
 HAVE_ICU = False
@@ -396,7 +397,7 @@ CSS = PLUGMAN.process_plugin_data("WEBSTUFF")
 
 # _NAME_COL = 3
 
-_WRONGMEDIAPATH = []
+_WRONGMEDIAPATH: List[List[str]] = []
 
 _HTML_DBL_QUOTES = re.compile(r'([^"]*) " ([^"]*) " (.*)', re.VERBOSE)
 _HTML_SNG_QUOTES = re.compile(r"([^']*) ' ([^']*) ' (.*)", re.VERBOSE)
@@ -615,36 +616,39 @@ def __get_place_keyname(dbase, handle):
     return utils.place_name(dbase, handle)
 
 
+class icuLocaleAlphabeticIndex(icuAlphabeticIndex):
+    """
+    Call the ICU AlphabeticIndex, passing the ICU Locale
+    """
+
+    def __init__(self, rlocale):
+        self.iculocale = Locale(rlocale.collation)
+        super().__init__(self.iculocale)
+
+        # set the maximum number of buckets, the undocumented default is 99
+        # Latin + Greek + Cyrillic + Hebrew + Arabic + Tamil + Hiragana +
+        # CJK Unified is about 206 different buckets
+        self.maxLabelCount = 500  # pylint: disable=invalid-name
+
+        # Add bucket labels for scripts other than the one for the output
+        # which is being generated
+        self.iculocale.addLikelySubtags()
+        default_script = self.iculocale.getDisplayScript()
+        used_scripts = [default_script]
+
+        for lang_code in glocale.get_language_dict().values():
+            loc = Locale(lang_code)
+            loc.addLikelySubtags()
+            script = loc.getDisplayScript()
+            if script not in used_scripts:
+                used_scripts.append(script)
+                super().addLabels(loc)
+
+
 if HAVE_ALPHABETICINDEX:
-
-    class AlphabeticIndex(icuAlphabeticIndex):
-        """
-        Call the ICU AlphabeticIndex, passing the ICU Locale
-        """
-
-        def __init__(self, rlocale):
-            self.iculocale = Locale(rlocale.collation)
-            super().__init__(self.iculocale)
-
-            # set the maximum number of buckets, the undocumented default is 99
-            # Latin + Greek + Cyrillic + Hebrew + Arabic + Tamil + Hiragana +
-            # CJK Unified is about 206 different buckets
-            self.maxLabelCount = 500  # pylint: disable=invalid-name
-
-            # Add bucket labels for scripts other than the one for the output
-            # which is being generated
-            self.iculocale.addLikelySubtags()
-            default_script = self.iculocale.getDisplayScript()
-            used_scripts = [default_script]
-
-            for lang_code in glocale.get_language_dict().values():
-                loc = Locale(lang_code)
-                loc.addLikelySubtags()
-                script = loc.getDisplayScript()
-                if script not in used_scripts:
-                    used_scripts.append(script)
-                    super().addLabels(loc)
-
+    AlphabeticIndex: Union[
+        Type[icuLocaleAlphabeticIndex], Type[localAlphabeticIndex]
+    ] = icuLocaleAlphabeticIndex
 else:
     AlphabeticIndex = localAlphabeticIndex
 

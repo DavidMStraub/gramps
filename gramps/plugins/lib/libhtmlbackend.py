@@ -21,19 +21,17 @@
 """Html and Html format management for the different reports
 """
 
+import os.path
+
 # ------------------------------------------------------------------------
 #
 # Python modules
 #
 # ------------------------------------------------------------------------
 from xml.sax.saxutils import escape
-import os.path
 
-# -------------------------------------------------------------------------
-#
-# GTK modules
-#
-# -------------------------------------------------------------------------
+from gramps.gen.const import GRAMPS_LOCALE as glocale
+from gramps.gen.errors import ReportError
 
 # ------------------------------------------------------------------------
 #
@@ -42,9 +40,13 @@ import os.path
 # ------------------------------------------------------------------------
 from gramps.gen.plug.docbackend import DocBackend
 from gramps.plugins.lib.libhtml import Html, xml_lang
-from gramps.gen.errors import ReportError
 
-from gramps.gen.const import GRAMPS_LOCALE as glocale
+# -------------------------------------------------------------------------
+#
+# GTK modules
+#
+# -------------------------------------------------------------------------
+
 
 _ = glocale.translation.gettext
 
@@ -191,7 +193,8 @@ class HtmlBackend(DocBackend):
         DocBackend.SUPERSCRIPT: ("<sup>", "</sup>"),
     }
 
-    ESCAPE_FUNC = lambda self: escape
+    def ESCAPE_FUNC(self):
+        return escape
 
     def __init__(self, filename=None):
         """
