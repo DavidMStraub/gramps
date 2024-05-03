@@ -68,7 +68,7 @@ jobs:
     - name: Run mypy static type checker
       run: |
         python3 -m pip install mypy
-        mypy gramps --ignore-missing-imports --exclude '.*gpr\.py$'
+        mypy gramps/gramps gramps/test --ignore-missing-imports --exclude '.*gpr\.py$'
     - name: Run unit test suite
       run: |
         export GDK_BACKEND=-
