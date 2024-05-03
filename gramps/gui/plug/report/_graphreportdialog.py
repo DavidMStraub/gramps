@@ -26,7 +26,6 @@
 
 """base class for generating dialogs for graph-based reports """
 
-import os
 
 # ------------------------------------------------------------------------
 #
@@ -34,6 +33,7 @@ import os
 #
 # ------------------------------------------------------------------------
 from abc import ABCMeta, abstractmethod
+import os
 from typing import Any, Dict, List
 
 # -------------------------------------------------------------------------------
@@ -41,7 +41,8 @@ from typing import Any, Dict, List
 # GTK+ modules
 #
 # -------------------------------------------------------------------------------
-from gi.repository import GObject, Gtk
+from gi.repository import Gtk
+from gi.repository import GObject
 
 # -------------------------------------------------------------------------------
 #

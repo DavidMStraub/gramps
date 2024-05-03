@@ -34,7 +34,6 @@ import logging
 
 LOG = logging.getLogger(".gen.utils.alive")
 
-from ..const import GRAMPS_LOCALE as glocale
 
 # -------------------------------------------------------------------------
 #
@@ -42,8 +41,9 @@ from ..const import GRAMPS_LOCALE as glocale
 #
 # -------------------------------------------------------------------------
 from ..display.name import displayer as name_displayer
-from ..errors import DatabaseError
 from ..lib.date import Date, Today
+from ..errors import DatabaseError
+from ..const import GRAMPS_LOCALE as glocale
 
 _ = glocale.translation.sgettext
 

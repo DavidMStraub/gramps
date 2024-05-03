@@ -18,8 +18,6 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #
 
-import html
-import logging
 
 # -------------------------------------------------------------------------
 #
@@ -27,6 +25,8 @@ import logging
 #
 # -------------------------------------------------------------------------
 import sys
+import html
+import logging
 import unicodedata
 
 _LOG = logging.getLogger(".dialog")
@@ -36,7 +36,10 @@ _LOG = logging.getLogger(".dialog")
 # GNOME/GTK+ modules
 #
 # -------------------------------------------------------------------------
-from gi.repository import Gdk, GdkPixbuf, GObject, Gtk
+from gi.repository import GObject
+from gi.repository import Gtk
+from gi.repository import Gdk
+from gi.repository import GdkPixbuf
 
 # -------------------------------------------------------------------------
 #
@@ -46,10 +49,10 @@ from gi.repository import Gdk, GdkPixbuf, GObject, Gtk
 from gramps.gen.const import GRAMPS_LOCALE as glocale
 
 _ = glocale.translation.gettext
+from gramps.gen.const import ICON as ICON_PATH, URL_BUGHOME
 from gramps.gen.config import config
-from gramps.gen.const import ICON as ICON_PATH
-from gramps.gen.const import URL_BUGHOME
 from gramps.gen.constfunc import is_quartz
+from .glade import Glade
 
 from .display import display_url
 from .glade import Glade

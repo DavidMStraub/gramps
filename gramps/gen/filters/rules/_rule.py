@@ -31,8 +31,8 @@ Base class for filter rules.
 import re
 from typing import List
 
-from ...const import GRAMPS_LOCALE as glocale
 from ...errors import FilterError
+from ...const import GRAMPS_LOCALE as glocale
 
 _ = glocale.translation.gettext
 

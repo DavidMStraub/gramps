@@ -30,8 +30,8 @@ and a register for the data of all plugins .
 #
 # -------------------------------------------------------------------------
 import os
-import re
 import sys
+import re
 import traceback
 
 # -------------------------------------------------------------------------
@@ -39,11 +39,9 @@ import traceback
 # Gramps modules
 #
 # -------------------------------------------------------------------------
-from ...version import VERSION as GRAMPSVERSION
-from ...version import VERSION_TUPLE
-from ..const import GRAMPS_LOCALE as glocale
-from ..const import IMAGE_DIR
+from ...version import VERSION as GRAMPSVERSION, VERSION_TUPLE
 from ..utils.requirements import Requirements
+from ..const import IMAGE_DIR
 
 _ = glocale.translation.gettext
 import logging

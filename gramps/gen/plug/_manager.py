@@ -30,17 +30,16 @@ Plugins are divided into several categories. These are: reports, tools,
 importers, exporters, quick reports, and document generators.
 """
 
-import importlib
-import logging
-
 # -------------------------------------------------------------------------
 #
 # Standard Python modules
 #
 # -------------------------------------------------------------------------
 import os
-import re
 import sys
+import re
+import logging
+import importlib
 
 LOG = logging.getLogger("._manager")
 LOG.propagate = True

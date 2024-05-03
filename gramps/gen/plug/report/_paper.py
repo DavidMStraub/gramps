@@ -28,19 +28,19 @@ from typing import List
 
 # -------------------------------------------------------------------------
 #
-# Try to abstract SAX1 from SAX2
-#
-# -------------------------------------------------------------------------
-from xml.sax import SAXParseException, handler, make_parser
-
-from ...const import PAPERSIZE
-
-# -------------------------------------------------------------------------
-#
 # Gramps modules
 #
 # -------------------------------------------------------------------------
 from ..docgen import PaperSize
+from ...const import PAPERSIZE
+
+# -------------------------------------------------------------------------
+#
+# Try to abstract SAX1 from SAX2
+#
+# -------------------------------------------------------------------------
+from xml.sax import make_parser, handler, SAXParseException
+
 
 # -------------------------------------------------------------------------
 #

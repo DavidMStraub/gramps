@@ -23,7 +23,6 @@
 Handles generation and access to thumbnails used in Gramps.
 """
 
-import logging
 
 # -------------------------------------------------------------------------
 #
@@ -31,6 +30,7 @@ import logging
 #
 # -------------------------------------------------------------------------
 import os
+import logging
 from hashlib import md5
 from typing import List
 
@@ -39,7 +39,8 @@ from typing import List
 # GTK/Gnome modules
 #
 # -------------------------------------------------------------------------
-from gi.repository import GdkPixbuf, GLib
+from gi.repository import GLib
+from gi.repository import GdkPixbuf
 
 try:
     from gi.repository import Gtk
@@ -56,13 +57,13 @@ except:
 from gramps.gen.const import (
     ICON,
     IMAGE_DIR,
-    SIZE_LARGE,
-    SIZE_NORMAL,
     THUMB_LARGE,
     THUMB_NORMAL,
+    SIZE_NORMAL,
+    SIZE_LARGE,
 )
 from gramps.gen.mime import get_type
-from gramps.gen.plug import START, BasePluginManager, Thumbnailer
+from gramps.gen.plug import BasePluginManager, START, Thumbnailer
 
 # -------------------------------------------------------------------------
 #
