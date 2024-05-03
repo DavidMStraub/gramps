@@ -44,22 +44,22 @@ import cairo
 #
 # -------------------------------------------------------------------------
 from ..utils import hex_to_rgb
-from .fanchart import BORDER_EDGE_WIDTH, PIXELS_PER_GENERATION, FanChartWidget
+from .fanchart import FanChartWidget, PIXELS_PER_GENERATION, BORDER_EDGE_WIDTH
 from .fanchartdesc import (
-    BACKGROUND_GRAD_AGE,
-    BACKGROUND_GRAD_GEN,
-    BACKGROUND_GRAD_PERIOD,
-    CHILDRING_WIDTH,
-    COLLAPSED,
-    EXPANDED,
-    FORM_CIRCLE,
-    NORMAL,
-    TRANSLATE_PX,
-    TYPE_BOX_FAMILY,
-    TYPE_BOX_NORMAL,
     FanChartBaseWidget,
     FanChartDescWidget,
     FanChartGrampsGUI,
+    NORMAL,
+    EXPANDED,
+    COLLAPSED,
+    TRANSLATE_PX,
+    CHILDRING_WIDTH,
+    BACKGROUND_GRAD_GEN,
+    BACKGROUND_GRAD_AGE,
+    BACKGROUND_GRAD_PERIOD,
+    FORM_CIRCLE,
+    TYPE_BOX_NORMAL,
+    TYPE_BOX_FAMILY,
 )
 
 # -------------------------------------------------------------------------

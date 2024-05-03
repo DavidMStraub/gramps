@@ -52,12 +52,13 @@ from gi.repository import GObject
 from gramps.gen.const import GRAMPS_LOCALE as glocale
 
 _ = glocale.translation.gettext
-import gramps.gen.plug.docgen.graphdoc as graphdoc
 from gramps.gen.config import config
-from gramps.gen.plug.menu import Menu
 from gramps.gen.plug.report import CATEGORY_GRAPHVIZ
+from ._reportdialog import ReportDialog
 
 from ._papermenu import PaperFrame
+import gramps.gen.plug.docgen.graphdoc as graphdoc
+from gramps.gen.plug.menu import Menu
 from ._reportdialog import ReportDialog
 
 

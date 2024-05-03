@@ -22,7 +22,6 @@
 Provide the base class for GRAMPS' DataView classes
 """
 
-import logging
 
 # ----------------------------------------------------------------
 #
@@ -30,6 +29,7 @@ import logging
 #
 # ----------------------------------------------------------------
 from abc import ABCMeta, abstractmethod
+import logging
 from typing import Any, Tuple
 
 _LOG = logging.getLogger(".pageview")
@@ -39,13 +39,13 @@ _LOG = logging.getLogger(".pageview")
 # gtk
 #
 # ----------------------------------------------------------------
-from gi.repository import Gdk, Gtk
+from gi.repository import Gtk
+from gi.repository import Gdk
 
 from gramps.gen.const import GRAMPS_LOCALE as glocale
 
 _ = glocale.translation.gettext
 
-from gramps.gen.config import config
 
 # ----------------------------------------------------------------
 #
@@ -53,11 +53,11 @@ from gramps.gen.config import config
 #
 # ----------------------------------------------------------------
 from gramps.gen.errors import WindowActiveError
-
-from ..configure import ConfigureDialog
 from ..dbguielement import DbGUIElement
-from ..uimanager import ActionGroup
 from ..widgets.grampletbar import GrampletBar
+from ..configure import ConfigureDialog
+from gramps.gen.config import config
+from ..uimanager import ActionGroup
 
 
 # ------------------------------------------------------------------------------

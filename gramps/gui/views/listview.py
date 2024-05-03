@@ -24,18 +24,17 @@
 Provide the base classes for GRAMPS' DataView classes
 """
 
-import logging
-import os
-import pickle
-
 # ----------------------------------------------------------------
 #
 # python modules
 #
 # ----------------------------------------------------------------
 from abc import abstractmethod
-from collections import deque
+import os
+import pickle
 from time import perf_counter
+import logging
+from collections import deque
 from typing import List, Optional, Tuple
 
 LOG = logging.getLogger(".gui.listview")
@@ -45,7 +44,9 @@ LOG = logging.getLogger(".gui.listview")
 # gtk
 #
 # ----------------------------------------------------------------
-from gi.repository import Gdk, Gtk, Pango
+from gi.repository import Gdk
+from gi.repository import Gtk
+from gi.repository import Pango
 
 # ----------------------------------------------------------------
 #
@@ -55,28 +56,27 @@ from gi.repository import Gdk, Gtk, Pango
 from gramps.gen.const import GRAMPS_LOCALE as glocale
 
 _ = glocale.translation.sgettext
-from gramps.gen.config import config
-from gramps.gen.const import CUSTOM_FILTERS
-from gramps.gen.db import DbTxn
-from gramps.gen.errors import FilterError, HandleError, WindowActiveError
-from gramps.gen.plug import CATEGORY_QR_PERSON
-from gramps.gen.utils.debug import profile
-from gramps.gen.utils.string import data_recover_msg
-
+from .pageview import PageView
+from .navigationview import NavigationView
+from ..uimanager import ActionGroup
 from ..columnorder import ColumnOrder
 from ..csvdialect import CsvDialect
-from ..ddtargets import DdTargets
-from ..dialog import ErrorDialog, MultiSelectDialog, QuestionDialog, QuestionDialog3
-from ..editors import FilterEditor
+from gramps.gen.config import config
+from gramps.gen.db import DbTxn
+from gramps.gen.errors import WindowActiveError, FilterError, HandleError
 from ..filters import SearchBar
+from ..widgets.menuitem import add_menuitem
+from gramps.gen.const import CUSTOM_FILTERS
+from gramps.gen.utils.debug import profile
+from gramps.gen.utils.string import data_recover_msg
+from gramps.gen.plug import CATEGORY_QR_PERSON
+from ..dialog import QuestionDialog, QuestionDialog3, ErrorDialog, MultiSelectDialog
+from ..editors import FilterEditor
+from ..ddtargets import DdTargets
 from ..plug.quick import create_quickreport_menu, create_web_connect_menu
-from ..uimanager import ActionGroup
 from ..utils import is_right_click
 from ..widgets.interactivesearchbox import InteractiveSearchBox
-from ..widgets.menuitem import add_menuitem
 from ..widgets.persistenttreeview import PersistentTreeView
-from .navigationview import NavigationView
-from .pageview import PageView
 
 # ----------------------------------------------------------------
 #

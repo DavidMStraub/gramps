@@ -30,16 +30,15 @@
 
 """LaTeX document generator"""
 
-import logging
-import os
-import re
-
 # ------------------------------------------------------------------------
 #
 # Python modules
 #
 # ------------------------------------------------------------------------
 from bisect import bisect
+import re
+import os
+import logging
 from typing import List
 
 try:
@@ -49,8 +48,6 @@ try:
 except ImportError:
     HAVE_PIL = False
 
-from gramps.gen.const import GRAMPS_LOCALE as glocale
-from gramps.gen.plug.docbackend import DocBackend
 
 # ----------------------------------------------------------------------- -
 #
@@ -58,12 +55,14 @@ from gramps.gen.plug.docbackend import DocBackend
 #
 # ------------------------------------------------------------------------
 from gramps.gen.plug.docgen import (
+    BaseDoc,
+    TextDoc,
     FONT_SANS_SERIF,
     PAPER_LANDSCAPE,
     URL_PATTERN,
-    BaseDoc,
-    TextDoc,
 )
+from gramps.gen.plug.docbackend import DocBackend
+from gramps.gen.const import GRAMPS_LOCALE as glocale
 
 _ = glocale.translation.gettext
 

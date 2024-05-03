@@ -43,23 +43,22 @@ import cairo
 #
 # -------------------------------------------------------------------------
 from gramps.gen.plug.report.utils import find_spouse
-
 from ..utils import hex_to_rgb
 from .fanchart import (
-    BACKGROUND_GRAD_AGE,
-    BACKGROUND_GRAD_GEN,
-    BACKGROUND_GRAD_PERIOD,
-    CHILDRING_WIDTH,
-    COLLAPSED,
-    EXPANDED,
+    FanChartBaseWidget,
+    FanChartGrampsGUI,
+    PAD_PX,
+    TRANSLATE_PX,
     FORM_CIRCLE,
     FORM_HALFCIRCLE,
     FORM_QUADRANT,
     NORMAL,
-    PAD_PX,
-    TRANSLATE_PX,
-    FanChartBaseWidget,
-    FanChartGrampsGUI,
+    EXPANDED,
+    COLLAPSED,
+    BACKGROUND_GRAD_GEN,
+    BACKGROUND_GRAD_AGE,
+    BACKGROUND_GRAD_PERIOD,
+    CHILDRING_WIDTH,
 )
 
 # -------------------------------------------------------------------------

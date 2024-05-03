@@ -29,9 +29,10 @@ __all__ = ["MaskedEntry", "ValidatableMaskedEntry"]
 from gramps.gen.const import GRAMPS_LOCALE as glocale
 
 _ = glocale.translation.gettext
-import logging
 import string
 import sys
+
+import logging
 
 _LOG = logging.getLogger(".widgets.validatedmaskedentry")
 
@@ -39,10 +40,12 @@ _LOG = logging.getLogger(".widgets.validatedmaskedentry")
 #
 # GTK/Gnome modules
 #
-# -------------------------------------------------------------------------
-from gi.repository import Gdk, GLib, GObject, Gtk, Pango
+from gi.repository import GObject
+from gi.repository import GLib
+from gi.repository import Gdk
+from gi.repository import Gtk
+from gi.repository import Pango
 
-from gramps.gen.constfunc import is_quartz
 
 # -------------------------------------------------------------------------
 #
@@ -50,8 +53,8 @@ from gramps.gen.constfunc import is_quartz
 #
 # -------------------------------------------------------------------------
 from gramps.gen.errors import MaskError, ValidationError, WindowActiveError
-
 from .undoableentry import UndoableEntry
+from gramps.gen.constfunc import is_quartz
 
 # ============================================================================
 #

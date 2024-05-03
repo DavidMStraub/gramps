@@ -34,13 +34,7 @@ importers, exporters, quick reports, and document generators.
 #
 # -------------------------------------------------------------------------
 import os
-
-from gi.repository import Gdk, GdkPixbuf, Gtk
-
-from gramps.gen.config import config
-from gramps.gen.const import ICON
-from gramps.gen.constfunc import win
-from gramps.gen.plug import BasePluginManager, PluginRegister
+from gi.repository import Gtk, GdkPixbuf, Gdk
 
 # -------------------------------------------------------------------------
 #
@@ -48,6 +42,10 @@ from gramps.gen.plug import BasePluginManager, PluginRegister
 #
 # -------------------------------------------------------------------------
 from gramps.gen.utils.callback import Callback
+from gramps.gen.plug import BasePluginManager, PluginRegister
+from gramps.gen.constfunc import win
+from gramps.gen.config import config
+from gramps.gen.const import ICON
 
 
 # -------------------------------------------------------------------------
