@@ -42,7 +42,7 @@ import logging
 import importlib
 
 LOG = logging.getLogger("._manager")
-LOG.propagate = True
+LOG.progagate = True
 from ..const import GRAMPS_LOCALE as glocale
 
 _ = glocale.translation.gettext
