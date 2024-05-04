@@ -335,13 +335,13 @@ if __name__ == "__main__":
     except AttributeError:
         localized_months = old_long
 
-    def print_po_snippet(en_loc_old_lists, context, line: int = 10000):
+    def print_po_snippet(en_loc_old_lists, context):
         for m, localized, old in zip(*en_loc_old_lists):
             if m == "":
                 continue
             if m == localized:
                 localized = old
-            print("#: {file}:{line}".format(file=filename, line=line))
+            print("#: {file}:{line}".format(file=filename, line=print_po_snippet.line))
             if context:
                 print('msgctxt "{context}"'.format(context=context))
             print(
@@ -350,7 +350,9 @@ if __name__ == "__main__":
                     en_month=m, localized_month=localized
                 )
             )
-            line += 1
+            print_po_snippet.line += 1
+
+    print_po_snippet.line = 10000
 
     try:
         localized_months = dd.__class__.long_months

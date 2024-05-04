@@ -79,7 +79,7 @@ class ObjEntry:
     ADD_STR = ""
     DEL_STR = ""
     _DND_TYPE = None
-    _DND_ICON = ""
+    _DND_ICON = None
 
     def __init__(
         self,

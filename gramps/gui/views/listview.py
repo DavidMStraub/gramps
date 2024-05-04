@@ -105,7 +105,7 @@ class ListView(NavigationView):
     EDIT_MSG = ""
     DEL_MSG = ""
     MERGE_MSG = ""
-    FILTER_TYPE = ""  # Set in inheriting class
+    FILTER_TYPE = None  # Set in inheriting class
     QR_CATEGORY = -1
 
     def __init__(
