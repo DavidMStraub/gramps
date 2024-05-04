@@ -647,7 +647,7 @@ if HAVE_ALPHABETICINDEX:
                     super().addLabels(loc)
 
 else:
-    AlphabeticIndex = localAlphabeticIndex
+    AlphabeticIndex = localAlphabeticIndex  # type: ignore
 
 
 def alphabet_navigation(sorted_alpha_index, rlocale=glocale, rtl=False):
