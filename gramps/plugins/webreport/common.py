@@ -616,39 +616,36 @@ def __get_place_keyname(dbase, handle):
     return utils.place_name(dbase, handle)
 
 
-class icuLocaleAlphabeticIndex(icuAlphabeticIndex):
-    """
-    Call the ICU AlphabeticIndex, passing the ICU Locale
-    """
-
-    def __init__(self, rlocale):
-        self.iculocale = Locale(rlocale.collation)
-        super().__init__(self.iculocale)
-
-        # set the maximum number of buckets, the undocumented default is 99
-        # Latin + Greek + Cyrillic + Hebrew + Arabic + Tamil + Hiragana +
-        # CJK Unified is about 206 different buckets
-        self.maxLabelCount = 500  # pylint: disable=invalid-name
-
-        # Add bucket labels for scripts other than the one for the output
-        # which is being generated
-        self.iculocale.addLikelySubtags()
-        default_script = self.iculocale.getDisplayScript()
-        used_scripts = [default_script]
-
-        for lang_code in glocale.get_language_dict().values():
-            loc = Locale(lang_code)
-            loc.addLikelySubtags()
-            script = loc.getDisplayScript()
-            if script not in used_scripts:
-                used_scripts.append(script)
-                super().addLabels(loc)
-
-
 if HAVE_ALPHABETICINDEX:
-    AlphabeticIndex: Union[
-        Type[icuLocaleAlphabeticIndex], Type[localAlphabeticIndex]
-    ] = icuLocaleAlphabeticIndex
+
+    class AlphabeticIndex(icuAlphabeticIndex):
+        """
+        Call the ICU AlphabeticIndex, passing the ICU Locale
+        """
+
+        def __init__(self, rlocale):
+            self.iculocale = Locale(rlocale.collation)
+            super().__init__(self.iculocale)
+
+            # set the maximum number of buckets, the undocumented default is 99
+            # Latin + Greek + Cyrillic + Hebrew + Arabic + Tamil + Hiragana +
+            # CJK Unified is about 206 different buckets
+            self.maxLabelCount = 500  # pylint: disable=invalid-name
+
+            # Add bucket labels for scripts other than the one for the output
+            # which is being generated
+            self.iculocale.addLikelySubtags()
+            default_script = self.iculocale.getDisplayScript()
+            used_scripts = [default_script]
+
+            for lang_code in glocale.get_language_dict().values():
+                loc = Locale(lang_code)
+                loc.addLikelySubtags()
+                script = loc.getDisplayScript()
+                if script not in used_scripts:
+                    used_scripts.append(script)
+                    super().addLabels(loc)
+
 else:
     AlphabeticIndex = localAlphabeticIndex
 

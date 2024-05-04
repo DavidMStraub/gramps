@@ -154,11 +154,17 @@ class M_A_M_B(ABCMeta, MetaClass):
 # class DummyDb
 #
 # -------------------------------------------------------------------------
-class DummyDbMeta(M_A_M_B):
-    pass
-
-
-class DummyDb(DbReadBase, Callback, object, metaclass=DummyDbMeta):
+class DummyDb(
+    M_A_M_B(
+        "NewBaseClass",
+        (
+            DbReadBase,
+            Callback,
+            object,
+        ),
+        {},
+    )
+):
     """
     Gramps database object. This object is a dummy database class that is always
     empty and is read-only.
