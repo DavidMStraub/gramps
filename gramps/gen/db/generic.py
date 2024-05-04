@@ -36,6 +36,7 @@ import sys
 import datetime
 import glob
 from pathlib import Path
+from typing import Any, Dict
 
 # ------------------------------------------------------------------------
 #
@@ -337,7 +338,7 @@ class DbGeneric(DbWriteBase, DbReadBase, UpdateCallback, Callback):
     A Gramps Database Backend. This replicates the grampsdb functions.
     """
 
-    __signals__ = dict(
+    __signals__: Dict[str, Any] = dict(
         (obj + "-" + op, signal)
         for obj in [
             "person",
